@@ -11,7 +11,7 @@ export async function get() {
 			const frontmatter = parseFrontMatter(slug);
 			accum.push({
 				slug,
-				title: frontmatter?.title || slug
+				title: frontmatter.data?.title || slug
 			})
 		}
 		return accum;
