@@ -1,16 +1,12 @@
-import {marked} from "marked";
 import {parseFrontMatter} from "$lib/parser";
 
 export async function GET({ params }) {
 	const { slug } = params;
 
-	const frontmatter = parseFrontMatter(slug);
-	if (frontmatter) {
+	const body = await parseFrontMatter(slug);
+	if (body) {
 		return {
-			body: {
-				data: frontmatter.data,
-				content: marked(frontmatter.content)
-			}
+			body
 		}
 	}
 

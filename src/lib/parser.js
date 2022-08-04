@@ -1,12 +1,12 @@
-import {existsSync, readFileSync} from "fs";
-import {resolve} from "path";
-import matter from "gray-matter";
-
-export function parseFrontMatter(slug) {
-	const filePath = resolve(`./src/pages/${slug}.md`);
-	if (existsSync(filePath)) {
-		const rawContent = readFileSync(filePath, 'utf8');
-		return matter(rawContent);
+export async function parseFrontMatter(slug) {
+	const pages = import.meta.glob('/src/pages/*.md');
+	const name = `/src/pages/${slug}.md`;
+	if (name in pages) {
+		const {html:content, attributes:data} = await pages[name]();
+		return {
+			data,
+			content
+		};
 	}
 
 	return null;
