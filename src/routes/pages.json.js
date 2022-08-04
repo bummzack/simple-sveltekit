@@ -1,21 +1,17 @@
-import {readdirSync} from "fs";
-import {basename, resolve} from "path";
-import {parseFrontMatter} from "$lib/parser";
+import {basename} from "path";
 
 export async function GET() {
-	const files = readdirSync(resolve('./src/pages'));
+	const pages = import.meta.glob('/src/pages/*.md');
 
-	const list = files.reduce((accum, fileName) => {
-		if (fileName.endsWith('.md')) {
-			const slug = basename(fileName, '.md');
-			const frontmatter = parseFrontMatter(slug);
-			accum.push({
-				slug,
-				title: frontmatter.data?.title || slug
-			})
-		}
-		return accum;
-	}, []);
+	let list = [];
+	for (const [key, module] of Object.entries(pages)) {
+		const {attributes:data} = await module();
+		const slug = basename(key, '.md');
+		list.push({
+			slug,
+			title: data?.title || slug
+		})
+	}
 
 	return {
 		status: 200,
