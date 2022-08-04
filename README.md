@@ -1,6 +1,6 @@
 # Simple Sveltekit
 
-A barebones sveltekit setup with markdown files as content source.
+A barebones SvelteKit setup with markdown files as content source.
 
 ## Writing content
 

@@ -2,7 +2,7 @@ import {readdirSync} from "fs";
 import {basename, resolve} from "path";
 import {parseFrontMatter} from "$lib/parser";
 
-export async function get() {
+export async function GET() {
 	const files = readdirSync(resolve('./src/pages'));
 
 	const list = files.reduce((accum, fileName) => {

@@ -1,7 +1,7 @@
-import marked from "marked";
+import {marked} from "marked";
 import {parseFrontMatter} from "$lib/parser";
 
-export async function get({ params }) {
+export async function GET({ params }) {
 	const { slug } = params;
 
 	const frontmatter = parseFrontMatter(slug);
