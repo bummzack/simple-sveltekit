@@ -1,0 +1,15 @@
+/* This imports the splendor theme */
+@import "markdown-splendor/css/splendor.css";
+
+.main-nav ul {
+	list-style-type: '–';
+	margin: 0;
+	padding: 0;
+}
+
+.main-nav li {
+	padding: 0;
+	margin: 0 0 0 1.4ex;
+}
+
+/* Add your own custom styles */

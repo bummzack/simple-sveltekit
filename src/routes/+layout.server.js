@@ -1,20 +1,20 @@
 import {basename} from "path";
 
-export async function GET() {
+/** @type {import('./$types').LayoutServerLoad} */
+export async function load() {
 	const pages = import.meta.glob('/src/pages/*.md');
 
 	let list = [];
 	for (const [key, module] of Object.entries(pages)) {
-		const {attributes:data} = await module();
+		const {attributes} = await module();
 		const slug = basename(key, '.md');
 		list.push({
 			slug,
-			title: data?.title || slug
+			title: attributes?.title || slug
 		})
 	}
 
 	return {
-		status: 200,
-		body: list
+		pages: list
 	}
 }
